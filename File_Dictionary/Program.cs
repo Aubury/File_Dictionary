@@ -32,11 +32,24 @@ namespace File_Dictionary
             //Пример использования репозитария
             IrregularVerbsRepository repo = new IrregularVerbsRepository();
             var verbs = repo.GetWords();
+            
+           
+            Dictionary<string, Irregular_verbs> row_verbs = new Dictionary<string, Irregular_verbs>(verbs.Length);
 
-            Dictionary<string, Irregular_verbs> row_verbs = new Dictionary<string, Irregular_verbs>();
+           
             foreach (var i in verbs)
             {
-                row_verbs.Add(i[0], new Irregular_verbs(i[0], i[1], i[2], i[3]));
+                //Irregular_verbs row = new Irregular_verbs(i[0], i[1], i[2], i[3]);
+                //row_verbs.Add(i[0], row);
+                try
+                {
+                  row_verbs.Add(i[0], new Irregular_verbs(i[0], i[1], i[2], i[3]));
+                } 
+                catch(Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                
             }
             foreach (var i in row_verbs)
             {
